@@ -6,16 +6,14 @@ data class Words(
 )
 
 fun main(args: Array<String>) {
-
-    // Implementation of getting text from stdin
-    val wordsArray: Array<String> = if (args.isEmpty())
+    // Проверяю были ли получены данные и если данные отсутствуют, принимаю их со стандартного потока ввода
+    val wordsArray: Array<String> = if (args.isEmpty()) 
         readLine().toString()
                 .split(" ")
                 .toTypedArray()
     else
-        args
-
-    //Search for unique values
+        args 
+        
     val uniqueList = mutableListOf<String>()
     var flagOn: Boolean = true
     for (elm in wordsArray) {
@@ -26,7 +24,6 @@ fun main(args: Array<String>) {
         flagOn = true
     }
 
-    //Counting words in a list
     val wordsList = mutableListOf<Words>()
     var countWords: Int
 
@@ -40,10 +37,8 @@ fun main(args: Array<String>) {
         wordsList.add(Words(uniqueElement, countWords))
     }
 
-    //Sort by word count
     wordsList.sortWith(compareByDescending { it.coincidences })
 
-    // OutPut
     println("\n Output the result: \n")
     wordsList.forEach { element ->
         println(" ${element.word} ${element.coincidences}")
