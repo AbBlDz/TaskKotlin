@@ -5,20 +5,22 @@ data class Words(
         val coincidences: Int = 0
 )
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
 
     // Implementation of getting text from stdin
     val wordsArray: Array<String> = if (args.isEmpty())
-        readLine().toString().split(" ").toTypedArray()
+        readLine().toString()
+                .split(" ")
+                .toTypedArray()
     else
         args
 
     //Search for unique values
     val uniqueList = mutableListOf<String>()
     var flagOn: Boolean = true
-    for(elm in wordsArray){
+    for (elm in wordsArray) {
         if (uniqueList.contains(elm)) flagOn = false
-        if(flagOn){
+        if (flagOn) {
             uniqueList.add(elm)
         }
         flagOn = true
@@ -28,22 +30,22 @@ fun main(args: Array<String>){
     val wordsList = mutableListOf<Words>()
     var countWords: Int
 
-    for(unqElm in uniqueList){
+    for (uniqueElement in uniqueList) {
         countWords = 0;
-        for (elm in wordsArray){
-            if (unqElm == elm) {
+        for (element in wordsArray) {
+            if (uniqueElement == element) {
                 countWords++
             }
         }
-        wordsList.add(Words(unqElm, countWords))
+        wordsList.add(Words(uniqueElement, countWords))
     }
 
     //Sort by word count
-    wordsList.sortWith(compareByDescending{it.coincidences})
+    wordsList.sortWith(compareByDescending { it.coincidences })
 
     // OutPut
     println("\n Output the result: \n")
-    wordsList.forEach { elm ->
-        println(" ${elm.word} ${elm.coincidences}")
+    wordsList.forEach { element ->
+        println(" ${element.word} ${element.coincidences}")
     }
 }
