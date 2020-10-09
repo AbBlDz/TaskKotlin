@@ -10,14 +10,9 @@ fun main(args: Array<String>) {
     else
         args
 
-    val uniqueList = mutableListOf<String>()
-    var flagOn: Boolean = true
-    for (elm in wordsArray) {
-        if (uniqueList.contains(elm)) flagOn = false
-        if (flagOn) {
-            uniqueList.add(elm)
-        }
-        flagOn = true
+    val uniqueList: MutableSet<String> = mutableSetOf()
+    wordsArray.forEach  {element ->
+        uniqueList.add(element)
     }
 
     var wordsList: MutableMap<String, Int> = mutableMapOf()
