@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
 
     val sortedWordsList = wordsList.sorted()
 
-    val wordsMap = sortedWordsList.groupingBy { it.toString() }.eachCount()
+    val wordsMap = sortedWordsList.groupingBy { it }.eachCount()
 
     val sortedMap = wordsMap.toList().sortedByDescending { it.second}.toMap()
 
