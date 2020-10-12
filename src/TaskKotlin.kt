@@ -1,34 +1,18 @@
 fun main(args: Array<String>) {
 
-    // Проверяю были ли получены данные и если данные отсутствуют, принимаю их со стандартного потока ввода
-    val wordsArray: Array<String> = if (args.isEmpty())
+    val wordsList: List<String> = if (args.isEmpty())
         readLine().toString()
                 .split(" ")
-                .toTypedArray()
+                .toList()
     else
-        args
+        args.toList()
 
-    val uniqueList: MutableSet<String> = mutableSetOf()
-    wordsArray.forEach  {element ->
-        uniqueList.add(element)
-    }
+    val sortedWordsList = wordsList.sorted()
 
-    val wordsList: MutableMap<String, Int> = mutableMapOf()
-    var countWords: Int
+    val wordsMap = sortedWordsList.groupingBy { it.toString() }.eachCount()
 
-    for (uniqueElement in uniqueList) {
-        countWords = 0
-        for (element in wordsArray) {
-            if (uniqueElement == element) {
-                countWords++
-            }
-        }
-        wordsList[uniqueElement] = countWords
-    }
+    val sortedMap = wordsMap.toList().sortedByDescending { it.second}.toMap()
 
-    wordsList.toList().sortedByDescending { it.second }.toMap()
-
-    wordsList.forEach { element ->
-        println(" ${element.key} - ${element.value}")
-    }
+    sortedMap.forEach { element ->
+        println(" ${element.key} - ${element.value}") }
 }
